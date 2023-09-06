@@ -1,10 +1,18 @@
 import './index.css';
 import AddTodoItem from './AddTodoItem.jsx';
 import TodoItem from './TodoItem.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function TodoList() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const tasksState = localStorage.getItem("ITEMS");
+    if (tasksState == null) return [];
+    return JSON.parse(tasksState);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(tasks));
+  }, [tasks])
 
   function addTask(text) {
     setTasks(currentTasks => {
