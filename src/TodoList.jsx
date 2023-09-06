@@ -4,25 +4,25 @@ import TodoItem from './TodoItem.jsx';
 import { useState } from 'react';
 
 function TodoList() {
-  const [items, setItems] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-  function addItem(text) {
-    setItems(currentItems => {
+  function addTask(text) {
+    setTasks(currentTasks => {
       return [
-        ...currentItems,
+        ...currentTasks,
         { id: crypto.randomUUID, completed: false, text: text }
       ];
     });
   }
 
   function toggleCompletion(id, completed) {
-    setItems((currentItems) => {
-      return currentItems.map((item) => {
-        if (item.id === id) {
-          return { ...item, completed };
+    setTasks((currentTasks) => {
+      return currentTasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, completed };
         }
 
-        return item;
+        return task;
       })
     })
   }
@@ -30,9 +30,9 @@ function TodoList() {
   return (
     <>
       <h1 className="text-4xl font-bold">Todo List</h1>
-      <AddTodoItem addItem={addItem} />
+      <AddTodoItem addTask={addTask} />
       <ul className="flex flex-col gap-2 max-w-4xl w-full text-xl">
-        {items.map((item) => {
+        {tasks.map((item) => {
           return <TodoItem key={item.id} id={item.id} completed={item.completed} text={item.text} toggleCompletion={toggleCompletion} />;
         })}
       </ul>
