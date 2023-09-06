@@ -1,17 +1,28 @@
 import './index.css';
 import AddTodoItem from './AddTodoItem.jsx';
 import TodoItem from './TodoItem.jsx';
+import { useState } from 'react';
 
 function TodoList() {
+  const [items, setItems] = useState([]);
+
+  function addItem(text) {
+    setItems(currentItems => {
+      return [
+        ...currentItems,
+        { id: crypto.randomUUID, completed: false, text: text }
+      ];
+    });
+  }
+
   return (
     <>
       <h1 className="text-4xl font-bold">Todo List</h1>
-      <form className="max-w-5xl w-full my-6">
-        <AddTodoItem />
-      </form>
+      <AddTodoItem addItem={addItem} />
       <ul className="flex flex-col gap-2 max-w-4xl w-full text-xl">
-        <TodoItem id="0" completed={true} text="Item 1" />
-        <TodoItem id="1" completed={false} text="Item 2" />
+        {items.map((item) => {
+          return <TodoItem key={item.id} completed={item.completed} text={item.text} />;
+        })}
       </ul>
     </>
   );
