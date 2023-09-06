@@ -27,13 +27,19 @@ function TodoList() {
     })
   }
 
+  function deleteTask(id) {
+    setTasks((currentTasks) => {
+      return currentTasks.filter(task => task.id !== id);
+    })
+  }
+
   return (
     <>
       <h1 className="text-4xl font-bold">Todo List</h1>
       <AddTodoItem addTask={addTask} />
       <ul className="flex flex-col gap-2 max-w-4xl w-full text-xl">
         {tasks.map((item) => {
-          return <TodoItem key={item.id} id={item.id} completed={item.completed} text={item.text} toggleCompletion={toggleCompletion} />;
+          return <TodoItem key={item.id} id={item.id} completed={item.completed} text={item.text} toggleCompletion={toggleCompletion} deleteTask={deleteTask} />;
         })}
       </ul>
     </>
