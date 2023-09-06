@@ -10,4 +10,4 @@ function TodoItem({ id, completed, text }) {
   );
 }
 
-export default TodoItem
+export default TodoItem;
