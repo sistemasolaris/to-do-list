@@ -10,7 +10,7 @@ function TodoList() {
     setTasks(currentTasks => {
       return [
         ...currentTasks,
-        { id: crypto.randomUUID, completed: false, text: text }
+        { id: crypto.randomUUID(), completed: false, text: text }
       ];
     });
   }
